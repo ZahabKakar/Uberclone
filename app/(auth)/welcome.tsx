@@ -11,6 +11,8 @@ const Onbording = () => {
 
   const [activeIndex, setActiveIndex] = useState(0);
 
+  const isLastSlid = activeIndex === onboarding.length - 1;
+
   return (
     <SafeAreaView className="flex h-full items-center justify-between bg-white">
       <TouchableOpacity
@@ -52,7 +54,15 @@ const Onbording = () => {
         ))}
       </Swiper>
 
-      <CustomButton ClassName="w-11/12 mt-10" title="Next" />
+      <CustomButton
+        className="w-11/12 mt-10"
+        title={isLastSlid ? "Get Started" : "Next"}
+        onPress={() =>
+          isLastSlid
+            ? router.replace("/(auth)/sign-up")
+            : swiperRef.current?.scrollBy(1)
+        }
+      />
     </SafeAreaView>
   );
 };
